@@ -1,3 +1,9 @@
+"""
+Download dataset between 10-20 mb,
+Split it into train/dev/test
+Return dataset info (length, max, min etc.)
+"""
+
 import string
 import pandas as pd
 from sklearn.model_selection import train_test_split
