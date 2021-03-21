@@ -38,8 +38,8 @@ movies_data["votes_number"] = (movies_data["votes_number"].str.replace(",", ""))
 
 # Normalize number values
 scaler = preprocessing.MinMaxScaler()
-movies_data[["rating", "votes_number", "year"]] = scaler.fit_transform(
-    movies_data[["rating", "votes_number", "year"]]
+movies_data[["rating", "votes_number", "year", "runtime"]] = scaler.fit_transform(
+    movies_data[["rating", "votes_number", "year", "runtime"]]
 )
 
 # Split set to train/dev/test 6:2:2 ratio and save to .csv file
@@ -61,7 +61,7 @@ for column in ["year", "rating", "runtime", "votes_number"]:
     column_data = movies_data[column]
     print(f"Information on {column}")
     print(f"Min: {column_data.min()}")
-    print(f"Mak: {column_data.max()}")
+    print(f"Max: {column_data.max()}")
     print(f"Mean: {column_data.mean()}")
     print(f"Median: {column_data.median()}")
     print(f"Standard deviation: {column_data.std()}, \n")
