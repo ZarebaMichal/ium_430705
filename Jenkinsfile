@@ -1,6 +1,5 @@
 pipeline{
     agent any
-    properties([parameters([text(defaultValue: '50', description: 'Number of lines to cutoff', name: 'CUTOFF')])])
     stages{
         stage('Stage 1'){
             steps{
