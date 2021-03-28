@@ -16,11 +16,11 @@ pipeline{
         }
         stage('sh: Shell Script'){
             steps{
-            withEnv(["CUTOFF=${params.CUTOFF}"])
+            withEnv(["CUTOFF=${params.CUTOFF}"]) {
                 sh "chmod 777 ./script.sh"
                 sh "./script.sh"
             }
-        }
+        }}
         stage('Archive artifacts'){
             steps{
                 archiveArtifacts 'test.csv'
