@@ -14,6 +14,7 @@ pipeline{
         }
         stage('sh: Shell Script'){
             steps{
+            withEnv(["CUTOFF=${params.CUTOFF}"])
                 ./script.sh
             }
         }
