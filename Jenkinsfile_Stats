@@ -1,0 +1,16 @@
+pipeline {
+    agent any
+    parameters {
+        buildSelector(defaultSelector: lastSuccessful(), description: 'Which build to use for copying artifacts', name: 'BUILD_SELECTOR')
+    }
+    stages {
+        stage("Clone repo & print stats"){
+            steps {
+                copyArtifacts fingerprintArtifacts: true, projectName: 's430705-create-dataset', selector: buildParameter('BUILD_SELECTOR')
+                sh "chmod 777 ./return_files_lines.sh"
+                sh "./return_files_lines.sh"
+                archiveArtifacts "stats.txt"
+            }
+        }
+    }
+}
