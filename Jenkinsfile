@@ -14,7 +14,8 @@ pipeline{
         stage('sh: Shell Script'){
             steps{
             withEnv(["CUTOFF=${params.CUTOFF}"])
-                ./script.sh
+                sh "chmod 777 ./script.sh"
+                sh "./script.sh"
             }
         }
         stage('Archive artifacts'){
