@@ -1,5 +1,8 @@
 pipeline{
     agent any
+    parameters {
+    string(defaultValue: '5', description: 'Amount of lines to cut off the file.', name: 'CUTOFF', trim: false)
+}
     stages{
         stage('Stage 1'){
             steps{
