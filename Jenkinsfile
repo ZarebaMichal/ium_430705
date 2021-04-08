@@ -1,5 +1,7 @@
 pipeline{
-    agent any
+    agent {
+        dockerfile true
+    }
     parameters {
     string(defaultValue: '5', description: 'Amount of lines to cut off the file.', name: 'CUTOFF', trim: false)
 }
