@@ -9,5 +9,5 @@ WORKDIR /app
 COPY ./requirements.txt ./
 COPY ./script2.py ./
 
-RUN pip3 install --user -r ./requirements.txt
+RUN pip3 install -r ./requirements.txt
 CMD python3 script2.py
