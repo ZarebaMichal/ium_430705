@@ -8,7 +8,7 @@ pipeline{
     stages{
         stage('Docker') {
             steps {
-                sh 'python3 script.py'
+                sh 'python3 script2.py'
             }
         }
         stage('Stage 1'){
