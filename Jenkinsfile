@@ -4,6 +4,11 @@ pipeline{
     string(defaultValue: '5', description: 'Amount of lines to cut off the file.', name: 'CUTOFF', trim: false)
 }
     stages{
+        stage('Docker') {
+            steps {
+                sh 'python3 script.py'
+            }
+        }
         stage('Stage 1'){
             steps{
                 echo 'Hello World!'
