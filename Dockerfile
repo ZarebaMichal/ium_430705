@@ -8,7 +8,6 @@ WORKDIR /app
 
 COPY ./requirements.txt ./
 COPY ./script2.py ./
-COPY ./kaggle.json /root/.kaggle/
 
 RUN pip3 install --user -r ./requirements.txt
 
