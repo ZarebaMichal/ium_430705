@@ -1,12 +1,13 @@
 pipeline{
-    agent {
-        dockerfile true
-    }
+    agent any
     parameters {
     string(defaultValue: '5', description: 'Amount of lines to cut off the file.', name: 'CUTOFF', trim: false)
 }
     stages{
         stage('Docker') {
+            agent {
+                dockerfile true
+            }
             steps {
                 sh 'python3 script2.py'
             }
