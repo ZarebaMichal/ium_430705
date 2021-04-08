@@ -15,7 +15,7 @@ pipeline {
         stage("Lab04 CW3"){
             agent {
                 docker {
-                    image "s430705/ium:2"
+                    image "s430705/ium:3"
                 }
             }
             steps {
