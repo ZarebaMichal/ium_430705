@@ -10,6 +10,6 @@ COPY ./requirements.txt ./
 COPY ./script2.py ./
 
 RUN pip3 install --user -r ./requirements.txt
-RUN pip3 install --user -r pandas
+RUN pip3 install pandas
 CMD python3 script2.py
 
