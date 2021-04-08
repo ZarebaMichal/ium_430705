@@ -12,5 +12,11 @@ pipeline {
                 archiveArtifacts "stats.txt"
             }
         }
+        stage ("Lab04 CW3"){
+            agent{ docker {image 's430705/ium:1'}}
+            steps {
+                sh 'python3 ./script2.py'
+            }
+        }
     }
 }
