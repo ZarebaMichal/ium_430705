@@ -1,5 +1,5 @@
 pipeline {
-    agent {docker {image 's430705/ium:1'}}
+    agent any
     parameters {
         buildSelector(defaultSelector: lastSuccessful(), description: 'Which build to use for copying artifacts', name: 'BUILD_SELECTOR')
     }
@@ -13,6 +13,11 @@ pipeline {
             }
         }
         stage("Lab04 CW3"){
+            agent {
+                docker {
+                    image "s430705/ium:1"
+                }
+            }
             steps {
                 sh 'python3 ./script2.py'
             }
