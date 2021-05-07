@@ -14,7 +14,7 @@ pipeline {
         }
 		stage('Sh script') {
 			steps {
-                sh 'python3 lab06_training.py ${params.LEARNING_RATE}'
+                sh 'python3 lab06_training.py'
 
 			}
 		}
