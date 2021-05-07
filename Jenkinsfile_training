@@ -23,5 +23,12 @@ pipeline {
 				archiveArtifacts artifacts: 'model_movies'
 			}
 		}
+		stage('Send notification'){
+            steps{
+                emailext body: currentBuild.result ?: 'SUCCESS +1 YEA',
+                subject: 's43705',
+                to: '26ab8f35.uam.onmicrosoft.com@emea.teams.ms'
+            }
+        }
     }
 }
