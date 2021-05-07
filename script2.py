@@ -37,9 +37,21 @@ movies_data["votes_number"] = (movies_data["votes_number"].str.replace(",", ""))
 
 # Normalize number values
 scaler = preprocessing.MinMaxScaler()
-movies_data[["rating", "votes_number", "year", "runtime"]] = scaler.fit_transform(
-    movies_data[["rating", "votes_number", "year", "runtime"]]
+movies_data[["votes_number", "year", "runtime"]] = scaler.fit_transform(
+    movies_data[["votes_number", "year", "runtime"]]
 )
+
+drop_columns = [
+    "original_title",
+    "countries",
+    "genres",
+    "director",
+    "cast",
+    "release_date",
+
+]
+
+movies_data.drop(labels=drop_columns, axis=1, inplace=True)
 
 # Split set to train/dev/test 6:2:2 ratio and save to .csv file
 train, dev = train_test_split(movies_data, train_size=0.6, test_size=0.4, shuffle=True)

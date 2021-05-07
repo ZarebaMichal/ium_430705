@@ -1,0 +1,27 @@
+pipeline {
+    agent {dockerfile true}
+	parameters {
+		buildSelector(
+					defaultSelector: lastSuccessful(),
+					description: 'Which build to use for copying artifacts',
+					name: 'BUILD_SELECTOR')
+	}
+    stages {
+		stage('copyArtifacts') {
+            steps {
+                copyArtifacts fingerprintArtifacts: true, projectName: 's430705-create-dataset', selector: buildParameter('BUILD_SELECTOR')
+            }
+        }
+		stage('Sh script') {
+			steps {
+                sh 'python3 lab06_training.py ${params.LEARNING_RATE}'
+
+			}
+		}
+		stage('Archive artifacts') {
+			steps{
+				archiveArtifacts artifacts: 'model_movies'
+			}
+		}
+    }
+}
