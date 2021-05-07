@@ -13,7 +13,7 @@ from tensorflow.keras.callbacks import EarlyStopping
 from sklearn.metrics import mean_squared_error, mean_absolute_error
 
 
-movies_data = pd.read_csv('train.csv' error_bad_lines=False)
+movies_data = pd.read_csv('train.csv', error_bad_lines=False)
 movies_data.drop(movies_data.columns[0], axis=1, inplace=True)
 movies_data.dropna(inplace=True)
 X = movies_data.drop("rating", axis=1)
