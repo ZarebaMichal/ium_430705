@@ -13,14 +13,13 @@ pipeline {
 				sh 'python3 lab06_training.py'
 				sh 'ls -l'
 				sh 'pwd'
-				sh 'zip model.zip model_movies'
 				
             }
         }
 
 		stage('Archive artifacts') {
 			steps{
-				archiveArtifacts 'model.zip'
+				archiveArtifacts 'model_movies/**'
 			}
 		}
 		stage('Send notification'){
