@@ -26,7 +26,7 @@ pipeline{
             steps{
             withEnv(["CUTOFF=${params.CUTOFF}"]) {
                 sh "chmod 777 ./script.sh"
-                sh "python3 ./script2.py"
+
 
             }
         }}
