@@ -20,7 +20,7 @@ pipeline {
 		stage('Archive artifacts') {
 			steps{
 			    sh 'zip /var/lib/jenkins/workspace/s430705-training_master/model.zip  /var/lib/jenkins/workspace/s430705-training_master/model_movies'
-				archiveArtifacts 'model.zip'
+				archiveArtifacts '/var/lib/jenkins/workspace/s430705-training_master/model.zip'
 			}
 		}
 		stage('Send notification'){
