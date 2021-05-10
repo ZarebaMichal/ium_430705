@@ -19,7 +19,7 @@ movies_data.dropna(inplace=True)
 X = movies_data.drop("rating", axis=1)
 Y = movies_data["rating"]
 
-
+print(X, Y.values)
 # Split set to train/test 8:2 ratio
 X_train, X_test, Y_train, Y_test = train_test_split(
     X, Y, test_size=0.2, random_state=42
