@@ -10,7 +10,7 @@ from datetime import datetime
 from sacred.observers import FileStorageObserver
 from sacred import Experiment
 
-ex = Experiment("file_observer", interactive=False)
+ex = Experiment("file_observer", interactive=False, save_git_info=False)
 ex.observers.append(FileStorageObserver('lab07/my_runs'))
 
 
