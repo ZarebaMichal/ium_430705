@@ -29,6 +29,7 @@ pipeline {
       stage('archiveArtifacts') {
          steps {
             archiveArtifacts 'eval.txt'
+            archiveArtifacts 'lab07/**'
          }
       }
        stage('sendMail') {
