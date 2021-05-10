@@ -47,4 +47,4 @@ model.fit(
 )
 
 
-model.save('model_movies.pb')
+model.save('model_movies')
