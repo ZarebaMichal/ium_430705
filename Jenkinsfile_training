@@ -10,14 +10,10 @@ pipeline {
 		stage('copyArtifacts') {
             steps {
                 copyArtifacts fingerprintArtifacts: true, projectName: 's430705-create-dataset', selector: buildParameter('BUILD_SELECTOR')
+				sh 'python3 lab06_training.py'
+				
             }
         }
-		
-		stage('run script') {
-			steps{
-				sh 'python3 lab06_training.py'
-			}
-		}
 
 		stage('Archive artifacts') {
 			steps{
