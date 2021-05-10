@@ -1,0 +1,42 @@
+pipeline {
+   agent {
+      dockerfile true
+   }
+   parameters{
+      buildSelector(
+            defaultSelector: lastSuccessful(),
+            description: 'Which build to use for copying artifacts',
+            name: 'WHICH_BUILD_DATA'
+        )
+        buildSelector(
+            defaultSelector: lastSuccessful(),
+            description: 'Which build to use for copying artifacts',
+            name: 'WHICH_BUILD_TRAIN'
+        )
+   }
+   stages {
+      stage('checkout') {
+            steps {
+                copyArtifacts fingerprintArtifacts: true, projectName: 's430705-create-dataset', selector: buildParameter('WHICH_BUILD_DATA')
+            }
+        }
+      stage('Docker'){
+         steps{
+            copyArtifacts fingerprintArtifacts: true, projectName: 's430705-training/master', selector: buildParameter('WHICH_BUILD_TRAIN')
+            sh 'python3 "./lab06-eval.py" >> eval.txt'
+         }
+      }
+      stage('archiveArtifacts') {
+         steps {
+            archiveArtifacts 'eval.txt'
+         }
+      }
+       stage('sendMail') {
+            steps{
+                emailext body: currentBuild.result ?: 'SUCCESS EVALUATION',
+                subject: 's430705 evaluation',
+                to: '26ab8f35.uam.onmicrosoft.com@emea.teams.ms'
+            }
+        }
+   }
+}
