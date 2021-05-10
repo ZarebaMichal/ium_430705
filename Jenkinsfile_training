@@ -19,7 +19,7 @@ pipeline {
 
 		stage('Archive artifacts') {
 			steps{
-				archiveArtifacts './model_movies.pb'
+				archiveArtifacts 'model_movies.pb'
 			}
 		}
 		stage('Send notification'){
