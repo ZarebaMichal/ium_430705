@@ -26,14 +26,15 @@ pipeline{
             steps{
             withEnv(["CUTOFF=${params.CUTOFF}"]) {
                 sh "chmod 777 ./script.sh"
-                sh "python3 ./scrip2.py"
+                sh "python3 ./script2.py"
+                archiveArtifacts 'test.csv'
+                archiveArtifacts 'dev.csv'
+                archiveArtifacts 'train.csv'
             }
         }}
         stage('Archive artifacts'){
             steps{
-                archiveArtifacts 'test.csv'
-                archiveArtifacts 'dev.csv'
-                archiveArtifacts 'train.csv'
+
 
         }
     }
