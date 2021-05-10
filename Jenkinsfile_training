@@ -13,14 +13,14 @@ pipeline {
 				sh 'python3 lab06_training.py'
 				sh 'ls -l'
 				sh 'pwd'
+				sh 'zip model.zip model_movies'
 				
             }
         }
 
 		stage('Archive artifacts') {
 			steps{
-			    sh 'zip /var/lib/jenkins/workspace/s430705-training_master/model.zip  /var/lib/jenkins/workspace/s430705-training_master/model_movies'
-				archiveArtifacts '/var/lib/jenkins/workspace/s430705-training_master/model.zip'
+				archiveArtifacts 'model.zip'
 			}
 		}
 		stage('Send notification'){
