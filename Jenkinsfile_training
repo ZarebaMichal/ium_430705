@@ -19,7 +19,8 @@ pipeline {
 
 		stage('Archive artifacts') {
 			steps{
-				archiveArtifacts 'model_movies/saved_model.pb'
+			    sh 'zip model.zip model_movies'
+				archiveArtifacts 'model.zip'
 			}
 		}
 		stage('Send notification'){
