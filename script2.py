@@ -21,15 +21,26 @@ movies_data.dropna(inplace=True)
 
 # Remove not interesting columns
 drop_columns = ["title_id", "certificate", "title", "plot"]
+drop_columns2 = [
+    "original_title",
+    "countries",
+    "genres",
+    "director",
+    "cast",
+    "release_date",
+
+]
+drop_columns = drop_columns + drop_columns2
+
 movies_data.drop(labels=drop_columns, axis=1, inplace=True)
 
 # Normalize data, lowercase str
-for column_name in ["original_title", "countries", "genres", "director", "cast"]:
-    movies_data[column_name] = (
-        movies_data[column_name]
-        .str.translate(str.maketrans("", "", string.punctuation))
-        .str.lower()
-    )
+# for column_name in ["original_title", "countries", "genres", "director", "cast"]:
+#     movies_data[column_name] = (
+#         movies_data[column_name]
+#         .str.translate(str.maketrans("", "", string.punctuation))
+#         .str.lower()
+#     )
 
 # Remove ',' from votes number and change type to int
 movies_data["votes_number"] = (movies_data["votes_number"].str.replace(",", "")).astype(
@@ -42,17 +53,9 @@ movies_data[["votes_number", "year", "runtime"]] = scaler.fit_transform(
     movies_data[["votes_number", "year", "runtime"]]
 )
 
-drop_columns = [
-    "original_title",
-    "countries",
-    "genres",
-    "director",
-    "cast",
-    "release_date",
 
-]
 
-movies_data.drop(labels=drop_columns, axis=1, inplace=True)
+#movies_data.drop(labels=drop_columns, axis=1, inplace=True)
 
 # Split set to train/dev/test 6:2:2 ratio and save to .csv file
 train, dev = train_test_split(movies_data, train_size=0.6, test_size=0.4, shuffle=True)
