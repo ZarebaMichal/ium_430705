@@ -19,7 +19,7 @@ pipeline {
 
 		stage('Archive artifacts') {
 			steps{
-				archiveArtifacts '/var/lib/jenkins/workspace/s430705-training_master/model_movies.pb'
+				archiveArtifacts 'model_movies/saved_model.pb'
 			}
 		}
 		stage('Send notification'){
