@@ -10,7 +10,7 @@ from sklearn.model_selection import train_test_split
 from sklearn import preprocessing
 import wget
 
-url = "https://git.wmi.amu.edu.pl/s430705/ium_430705/raw/commit/755bc2b67abdfdd67dd9abac0c850d21b04d0da5/imdb_movies.csv"
+url = "https://git.wmi.amu.edu.pl/s430705/ium_430705/raw/branch/master/imdb_movies.csv"
 #url = 'https://git.wmi.amu.edu.pl/s430705/ium_430705/raw/branch/master/imdb_movies.csv'
 wget.download(url, out='imdb_movies.csv', bar=None)
 
