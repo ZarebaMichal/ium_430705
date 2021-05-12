@@ -1,3 +1,4 @@
+pymongo==3.11.4
 scikit-learn==0.24.1
 h5py==2.10.0
 kaggle==1.5.12
