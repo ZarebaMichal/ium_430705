@@ -24,7 +24,8 @@ pipeline {
          steps{
             copyArtifacts fingerprintArtifacts: true, projectName: 's430705-training/master', selector: buildParameter('WHICH_BUILD_TRAIN')
             sh 'python3 "./lab06-eval.py" >> eval.txt'
-            sh 'python3 "./lab07_sacred.py"'
+            sh 'python3 "./lab07_sacred01.py"'
+            sh 'python3 "./lab07_sacred02.py"'
          }
       }
       stage('archiveArtifacts') {
