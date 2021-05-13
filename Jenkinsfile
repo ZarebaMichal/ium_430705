@@ -38,7 +38,7 @@ pipeline{
     }
     post {
         success {
-            build job: 's430705-training/master', parameters: [string(name: 'epochs', value:'300')]
+            build job: 's430705-training', parameters: [string(name: 'epochs', value:'300')]
         }
     }
 }
