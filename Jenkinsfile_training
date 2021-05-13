@@ -9,7 +9,7 @@ pipeline {
             defaultValue: '300',
             description: 'Number of epochs.',
             name: 'epochs',
-            trim: false
+            trim: false)
 	}
 
     stages {
