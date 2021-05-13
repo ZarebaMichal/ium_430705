@@ -38,7 +38,7 @@ pipeline{
     }
     post {
         success {
-            build job: 's430705-training/master', parameters: [string(name: 'epochs', value:'300'), string(name: 'BUILD_SELECTOR', value: '<StatusBuildSelector plugin="copyartifact@1.46"/>')]
+            build job: 's430705-training/master', parameters: [string(name: 'epochs', value:'300'), buildSelector(name: 'BUILD_SELECTOR', defaultSelector: lastSuccessful())]
         }
     }
 }
