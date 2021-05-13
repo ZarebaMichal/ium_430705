@@ -30,7 +30,7 @@ pipeline {
     post {
         success {
 
-            build job: 's430705-training/evaluation'
+            build job: 's430705-evaluation/master'
             mail body: 'SUCCESS',
                 subject: 's430705',
                 to: '26ab8f35.uam.onmicrosoft.com@emea.teams.ms'
