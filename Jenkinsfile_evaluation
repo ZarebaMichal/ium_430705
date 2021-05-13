@@ -31,9 +31,7 @@ pipeline {
         }
       stage('Evaluation') {
          steps{
-            def test = build job:"s430705-training/master"
-            def buildNumber = test.getNumber()
-            sh 'python3 "./lab06-eval.py ${buildNumber}"'
+            sh 'python3 "./lab06-eval.py ${env.BUILD_ID}"'
             sh 'python3 "./lab06-plot.py"'
             sh 'python3 "./lab07_sacred01.py"'
             sh 'python3 "./lab07_sacred02.py"'
