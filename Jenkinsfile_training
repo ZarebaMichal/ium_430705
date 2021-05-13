@@ -31,7 +31,7 @@ pipeline {
     post {
         success {
 
-            build job: 's430705-evaluation/master', parameters: [string(name: 'buildNumber', value: '${env.BUILD_NUMBER}')]
+            build job: 's430705-evaluation/master', parameters: [string(name: 'buildNumber', value: ${env.BUILD_NUMBER})]
             mail body: 'SUCCESS',
                 subject: 's430705',
                 to: '26ab8f35.uam.onmicrosoft.com@emea.teams.ms'
