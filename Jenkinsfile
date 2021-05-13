@@ -38,7 +38,7 @@ pipeline{
     }
     post {
         success {
-            build job: 's430705-training/master', parameters: [string(name: 'epochs', value:'300'), buildSelector(name: 'BUILD_SELECTOR', defaultSelector: lastSuccessful())]
+            build job: 's430705-training/master', parameters: [string(name: 'epochs', value:'300')]
         }
     }
 }
