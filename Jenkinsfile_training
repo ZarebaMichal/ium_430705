@@ -29,18 +29,18 @@ pipeline {
 
     post {
         success {
-            emailtext body: 'SUCCESS',
+            mail body: 'SUCCESS',
                 subject: 's430705',
                 to: '26ab8f35.uam.onmicrosoft.com@emea.teams.ms'
         }
         unstable {
-            emailtext body: 'UNSTABLE', subject: 's430705', to: '26ab8f35.uam.onmicrosoft.com@emea.teams.ms'
+            mail body: 'UNSTABLE', subject: 's430705', to: '26ab8f35.uam.onmicrosoft.com@emea.teams.ms'
         }
         failure {
-            emailtext body: 'FAILURE', subject: 's430705', to: '26ab8f35.uam.onmicrosoft.com@emea.teams.ms'
+            mail body: 'FAILURE', subject: 's430705', to: '26ab8f35.uam.onmicrosoft.com@emea.teams.ms'
         }
         changed {
-            emailtext body: 'CHANGED', subject: 's430705', to: '26ab8f35.uam.onmicrosoft.com@emea.teams.ms'
+            mail body: 'CHANGED', subject: 's430705', to: '26ab8f35.uam.onmicrosoft.com@emea.teams.ms'
         }
     }
 }
