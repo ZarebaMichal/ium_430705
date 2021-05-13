@@ -18,6 +18,13 @@ pipeline {
             description: 'Which build to use for copying artifacts',
             name: 'WHICH_BUILD_EVAL'
       )
+      string(
+            defaultValue: '0',
+            description: 'Build number of s430705-training',
+            name: 'buildNumber',
+            trim: false
+      )
+
       gitParameter branchFilter: 'origin/(.*)', defaultValue: 'master', name: 'BRANCH', type: 'PT_BRANCH'
   }
 
@@ -31,10 +38,7 @@ pipeline {
         }
       stage('Evaluation') {
          steps {
-            script {
-                def build_number = Jenkins.instance.getitem("s430705-training/master").lastSuccessfulBuild.number
-            }
-            sh 'python3 "./lab06-eval.py build_number"'
+            sh 'python3 "./lab06-eval.py ${buildNumber}"'
             sh 'python3 "./lab06-plot.py"'
             sh 'python3 "./lab07_sacred01.py"'
             sh 'python3 "./lab07_sacred02.py"'
