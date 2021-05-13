@@ -17,7 +17,6 @@ pipeline {
             steps {
                 copyArtifacts fingerprintArtifacts: true, projectName: 's430705-create-dataset', selector: buildParameter('BUILD_SELECTOR')
 				sh "python3 lab06_training.py ${epochs}"
-				sh "echo ${env.BUILD_NUMBER}"
             }
         }
 
@@ -31,7 +30,7 @@ pipeline {
     post {
         success {
 
-            build job: 's430705-evaluation/master', parameters: [buildSelector: buildNumber(UPSTREAM_BUILD_NUMBER)]
+            build job: 's430705-evaluation/master'
             mail body: 'SUCCESS',
                 subject: 's430705',
                 to: '26ab8f35.uam.onmicrosoft.com@emea.teams.ms'
