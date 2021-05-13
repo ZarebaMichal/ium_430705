@@ -32,7 +32,7 @@ pipeline {
       stage('Evaluation') {
          steps {
          	sh 'buildNumber=$(echo $BUILD_NUMBER)'
-            sh "python3 ./lab06-eval.py ${buildNumber}"
+            sh "python3 ./lab06-eval.py $BUILD_NUMBER"
             sh 'python3 "./lab06-plot.py"'
             sh 'python3 "./lab07_sacred01.py"'
             sh 'python3 "./lab07_sacred02.py"'
