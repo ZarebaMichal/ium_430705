@@ -31,7 +31,8 @@ pipeline {
         }
       stage('Evaluation') {
          steps{
-            sh 'python3 "./lab06-eval.py ${env.BUILD_ID}"'
+            build = ${env.BUILD_ID}
+            sh 'python3 "./lab06-eval.py build"'
             sh 'python3 "./lab06-plot.py"'
             sh 'python3 "./lab07_sacred01.py"'
             sh 'python3 "./lab07_sacred02.py"'
