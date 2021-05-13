@@ -1,3 +1,4 @@
+import sys
 import string
 import pandas as pd
 from sklearn.model_selection import train_test_split
@@ -36,6 +37,7 @@ model.compile(optimizer="adam", loss="mse")
 
 early_stop = EarlyStopping(monitor="val_loss", mode="min", verbose=1, patience=10)
 
+epochs = int(sys.argv[1]) if len(sys.argv) > 1 else 300
 
 model.fit(
     x=X_train.values,

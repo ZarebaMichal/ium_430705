@@ -5,15 +5,18 @@ pipeline {
 					defaultSelector: lastSuccessful(),
 					description: 'Which build to use for copying artifacts',
 					name: 'BUILD_SELECTOR')
+		string(
+            defaultValue: '300',
+            description: 'Number of epochs.',
+            name: 'epochs',
+            trim: false
 	}
+
     stages {
 		stage('copyArtifacts') {
             steps {
                 copyArtifacts fingerprintArtifacts: true, projectName: 's430705-create-dataset', selector: buildParameter('BUILD_SELECTOR')
-				sh 'python3 lab06_training.py'
-				sh 'ls -l'
-				sh 'pwd'
-				
+				sh 'python3 lab06_training.py $epochs'
             }
         }
 
@@ -22,12 +25,22 @@ pipeline {
 				archiveArtifacts 'model_movies/**'
 			}
 		}
-		stage('Send notification'){
-            steps{
-                emailext body: currentBuild.result ?: 'SUCCESS +1 YEA',
-                subject: 's43705',
+	}
+
+    post {
+        success {
+            emailtext body: 'SUCCESS',
+                subject: 's430705',
                 to: '26ab8f35.uam.onmicrosoft.com@emea.teams.ms'
-            }
+        }
+        unstable {
+            emailtext body: 'UNSTABLE', subject: 's430705', to: '26ab8f35.uam.onmicrosoft.com@emea.teams.ms'
+        }
+        failure {
+            emailtext body: 'FAILURE', subject: 's430705', to: '26ab8f35.uam.onmicrosoft.com@emea.teams.ms'
+        }
+        changed {
+            emailtext body: 'CHANGED', subject: 's430705', to: '26ab8f35.uam.onmicrosoft.com@emea.teams.ms'
         }
     }
 }

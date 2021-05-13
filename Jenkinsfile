@@ -26,8 +26,6 @@ pipeline{
             steps{
             withEnv(["CUTOFF=${params.CUTOFF}"]) {
                 sh "chmod 777 ./script.sh"
-
-
             }
         }}
         stage('Archive artifacts'){
@@ -35,7 +33,12 @@ pipeline{
                 archiveArtifacts 'test.csv'
                 archiveArtifacts 'dev.csv'
                 archiveArtifacts 'train.csv'
-
+            }
         }
     }
-}}
+    post {
+        success {
+            build job: 's430705-training/master', parameters: [string(name: 'epochs', defaultValue:'300'), string(name: 'BUILD_SELECTOR', defaultValue: lastSuccessful()]
+        }
+    }
+}
