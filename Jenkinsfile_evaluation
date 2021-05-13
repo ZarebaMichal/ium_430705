@@ -30,9 +30,11 @@ pipeline {
             }
         }
       stage('Evaluation') {
-         steps{
-            build = ${env.BUILD_ID}
-            sh 'python3 "./lab06-eval.py build"'
+         steps {
+            script {
+                def build_number = Jenkins.instance.getitem("s430705-training/master").lastSuccessfulBuild.number
+            }
+            sh 'python3 "./lab06-eval.py build_number"'
             sh 'python3 "./lab06-plot.py"'
             sh 'python3 "./lab07_sacred01.py"'
             sh 'python3 "./lab07_sacred02.py"'
