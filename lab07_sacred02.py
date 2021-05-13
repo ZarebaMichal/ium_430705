@@ -10,7 +10,7 @@ from tensorflow.keras.layers import Dense, Dropout
 from tensorflow.keras.models import Sequential
 
 ex = Experiment("file_observer", interactive=False, save_git_info=False)
-ex.observers.append(MongoObserver(url='mongodb://mongo_user:mongo_password_IUM_2021@localhost:27017',
+ex.observers.append(MongoObserver(url='mongodb://mongo_user:mongo_password_IUM_2021@172.17.0.1:27017',
                                   db_name='sacred'))
 
 @ex.config
