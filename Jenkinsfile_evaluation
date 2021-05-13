@@ -29,7 +29,7 @@ pipeline {
                 copyArtifacts optional: true, fingerprintArtifacts: true, projectName: 's430705-evaluation/master', selector: buildParameter('WHICH_BUILD_EVAL')
             }
         }
-      stage('Evaluation){
+      stage('Evaluation') {
          steps{
             sh 'python3 "./lab06-eval.py ${WHICH_BUILD_TRAIN}"'
             sh 'python3 "./lab06-plot.py"'
