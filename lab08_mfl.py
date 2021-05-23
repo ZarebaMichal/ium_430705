@@ -46,11 +46,13 @@ def prepare_model(train_size_param, test_size_param, epochs, batch_size):
     )
     y_pred = model.predict(x_test.values)
 
+    input_example = X_test.values[10]
+
     rmse = mean_squared_error(y_test, y_pred)
 
     model.save("model_movies")
 
-    return model, rmse
+    return model, rmse, X_train, input_example
 
 
 train_size_param = float(sys.argv[1]) if len(sys.argv) > 1 else 0.8
@@ -66,7 +68,7 @@ with mlflow.start_run():
     mlflow.log_param("epochs", epochs)
     mlflow.log_param("batch size", batch_size)
 
-    model, rmse = prepare_model(
+    model, rmse, X_train, input_example = prepare_model(
         train_size_param=train_size_param,
         test_size_param=test_size_param,
         epochs=epochs,
@@ -75,4 +77,5 @@ with mlflow.start_run():
 
     mlflow.log_metric("RMSE", rmse)
 
-    mlflow.keras.log_model(model, "movies_imdb")
+    signature = mlflow.models.signature.infer_signature(X_train.values, model.predict(X_train.values))
+    mlflow.keras.save_model(model, "movies_imdb", input_example=input_example, signature=signature)
