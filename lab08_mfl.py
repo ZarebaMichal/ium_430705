@@ -82,7 +82,7 @@ with mlflow.start_run():
     mlflow.log_metric("RMSE", rmse)
 
     signature = mlflow.models.signature.infer_signature(X_train.values, model.predict(X_train.values))
-    mlflow.keras.save_model(model, "movies_imdb", input_example=input_example, signature=signature)
+    # mlflow.keras.save_model(model, "movies_imdb", input_example=input_example, signature=signature)
 
     tracking_url_type_store = urlparse(mlflow.get_tracking_uri()).scheme
     if tracking_url_type_store != "file":
