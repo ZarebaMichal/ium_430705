@@ -16,7 +16,7 @@ pipeline {
         }
         stage('Predict example value'){
             steps {
-                'sh 'python3 "./lab_09_predict.py"''
+                sh 'python3 "./lab_09_predict.py"'
             }
         }
 	}
