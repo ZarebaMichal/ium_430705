@@ -1,0 +1,23 @@
+pipeline {
+    agent {dockerfile true}
+	parameters {
+		buildSelector(
+					defaultSelector: lastSuccessful(),
+					description: 'Which build to use for copying artifacts',
+					name: 'BUILD_SELECTOR')
+	}
+
+    stages {
+		stage('copyArtifacts') {
+            steps {
+                copyArtifacts fingerprintArtifacts: true, projectName: 's434804-training', selector: buildParameter('BUILD_SELECTOR')
+
+            }
+        }
+        stage('Predict example value'){
+            steps {
+                'sh 'python3 "./lab_09_predict.py"''
+            }
+        }
+	}
+}
