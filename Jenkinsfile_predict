@@ -10,7 +10,7 @@ pipeline {
     stages {
 		stage('copyArtifacts') {
             steps {
-                copyArtifacts fingerprintArtifacts: true, projectName: 's434804-training', selector: buildParameter('BUILD_SELECTOR')
+                copyArtifacts fingerprintArtifacts: true, projectName: 's434804-training/master', selector: buildParameter('BUILD_SELECTOR')
 
             }
         }
