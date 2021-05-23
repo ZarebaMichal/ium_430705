@@ -22,7 +22,7 @@ pipeline {
 
 		stage('Archive artifacts') {
 			steps{
-				archiveArtifacts 'model_movies/**'
+				archiveArtifacts 'movies_imdb/**'
 			}
 		}
 	}
