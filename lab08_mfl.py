@@ -9,7 +9,7 @@ from tensorflow.keras.layers import Dense, Dropout
 from tensorflow.keras.models import Sequential
 from urllib.parse import urlparse
 
-mlflow.set_experiment("s430705")
+
 mlflow.set_tracking_uri("http://172.17.0.1:5000")
 
 
@@ -83,7 +83,7 @@ with mlflow.start_run():
 
     signature = mlflow.models.signature.infer_signature(X_train.values, model.predict(X_train.values))
     # mlflow.keras.save_model(model, "movies_imdb", input_example=input_example, signature=signature)
-
+    mlflow.set_experiment("s430705")
     tracking_url_type_store = urlparse(mlflow.get_tracking_uri()).scheme
     if tracking_url_type_store != "file":
         mlflow.keras.log_model(model, "movies_imdb2", registered_model_name="s430705", signature=signature,
