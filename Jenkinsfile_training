@@ -16,6 +16,8 @@ pipeline {
 		stage('copyArtifacts') {
             steps {
                 copyArtifacts fingerprintArtifacts: true, projectName: 's430705-create-dataset', selector: buildParameter('BUILD_SELECTOR')
+                sh "rm -rf movies_imdb"
+                sh "python3 lab08_mfl.py"
 				sh "python3 lab06_training.py ${epochs}"
             }
         }
