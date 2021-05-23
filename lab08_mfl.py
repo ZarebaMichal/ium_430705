@@ -86,7 +86,7 @@ with mlflow.start_run():
 
     tracking_url_type_store = urlparse(mlflow.get_tracking_uri()).scheme
     if tracking_url_type_store != "file":
-        mlflow.keras.log_model(model, "movies_imdb", registered_model_name="s430705", signature=signature,
+        mlflow.keras.log_model(model, "movies_imdb2", registered_model_name="s430705", signature=signature,
                                  input_example=input_example)
     else:
         mlflow.keras.log_model(model, "model_movies", signature=signature, input_example=input_example)
