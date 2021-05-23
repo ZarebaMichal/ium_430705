@@ -7,6 +7,10 @@ from sklearn.model_selection import train_test_split
 from tensorflow.keras.callbacks import EarlyStopping
 from tensorflow.keras.layers import Dense, Dropout
 from tensorflow.keras.models import Sequential
+from urllib.parse import urlparse
+
+mlflow.set_experiment("s430705")
+mlflow.set_tracking_uri("http://172.17.0.1:5000")
 
 
 def prepare_model(train_size_param, test_size_param, epochs, batch_size):
@@ -79,3 +83,11 @@ with mlflow.start_run():
 
     signature = mlflow.models.signature.infer_signature(X_train.values, model.predict(X_train.values))
     mlflow.keras.save_model(model, "movies_imdb", input_example=input_example, signature=signature)
+
+    tracking_url_type_store = urlparse(mlflow.get_tracking_uri()).scheme
+    if tracking_url_type_store != "file":
+        mlflow.keras.log_model(model, "movies_imdb", registered_model_name="s430705", signature=signature,
+                                 input_example=input_example)
+    else:
+        mlflow.keras.log_model(model, "model_movies", signature=signature, input_example=input_example)
+        mlflow.keras.save_model(model, "movies_mdb", signature=signature, input_example=input_example)
