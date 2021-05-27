@@ -1,7 +1,9 @@
 pipeline {
-    agent {dockerfile true}
-    environment {
-        img = docker.build('s430705/ium:4')
+    agent {
+        docker {
+            image 's430705/ium:4'
+            args '-v /tmp/mlruns:/tmp/mlruns -v /mlruns:/mlruns '
+        }
     }
 	parameters {
 		buildSelector(
@@ -16,17 +18,12 @@ pipeline {
 	}
 
     stages {
-
-        stage('MLFLOW mounted'){
-            img.inside('-v /tmp/mlruns:/tmp/mlruns -v /mlruns:/mlruns ') {
-                sh "export MLFLOW_TRACKING_URI=http://172.17.0.1:5000"
-                sh "python3 lab08_mfl.py"
-            }
-        }
 		stage('copyArtifacts') {
             steps {
                 copyArtifacts fingerprintArtifacts: true, projectName: 's430705-create-dataset', selector: buildParameter('BUILD_SELECTOR')
                 sh "rm -rf movies_imdb"
+                sh "python3 lab08_mfl.py"
+                sh "export MLFLOW_TRACKING_URI=http://172.17.0.1:5000"
                 sh "python3 lab08_mfl.py"
 				sh "python3 lab06_training.py ${epochs}"
             }
