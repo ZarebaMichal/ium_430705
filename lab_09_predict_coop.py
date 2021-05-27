@@ -21,7 +21,7 @@ version of choosen model, and then get path to model's files
 
 client = MlflowClient()
 models_version = client.search_model_versions("name='s430705'")
-path_to_input = models_version[-1]["source"]
+path_to_input = models_version[-1].source
 
 with open(f'{path_to_input}/input_example.json', 'r') as datafile:
     data = json.load(datafile)
