@@ -5,7 +5,7 @@ import pandas as pd
 
 model_name = "s430705"
 model_version = 8
-
+ 
 mlflow.set_tracking_uri("http://172.17.0.1:5000")
 
 model = mlflow.pyfunc.load_model(
