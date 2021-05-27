@@ -12,7 +12,7 @@ model = mlflow.pyfunc.load_model(
     model_uri=f"models:/{model_name}/{model_version}"
 )
 
-with open('movies_imdb2/input_example.json', 'r') as datafile:
+with open('artifacts/model/input_example.json', 'r') as datafile:
     data = json.load(datafile)
     example_input = data["inputs"]
 
