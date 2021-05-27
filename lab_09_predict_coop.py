@@ -13,7 +13,7 @@ model = mlflow.pyfunc.load_model(
     model_uri=f"models:/{model_name}/{model_version}"
 )
 client = MlflowClient()
-models_version = client.search_model_versions("name='s430705'"):
+models_version = client.search_model_versions("name='s430705'")
 print(type(models_version))
 
 with open('/tmp/mlruns/0/6be4f90846214df8913a553bc53b1019/artifacts/movies_imdb2/input_example.json', 'r') as datafile:
