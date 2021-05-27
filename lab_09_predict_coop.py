@@ -12,10 +12,10 @@ model = mlflow.pyfunc.load_model(
     model_uri=f"models:/{model_name}/{model_version}"
 )
 
-with open('artifacts/model/input_example.json', 'r') as datafile:
-    data = json.load(datafile)
-    example_input = data["inputs"]
+# with open('artifacts/model/input_example.json', 'r') as datafile:
+#     data = json.load(datafile)
+#     example_input = data["inputs"]
 
-input_dictionary = {i: x for i, x in enumerate(example_input)}
-input_ex = pd.DataFrame(input_dictionary, index=[0])
-print(model.predict(input_ex))
+# input_dictionary = {i: x for i, x in enumerate(example_input)}
+# input_ex = pd.DataFrame(input_dictionary, index=[0])
+print(model.predict(input_example))
