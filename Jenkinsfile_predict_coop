@@ -1,0 +1,15 @@
+pipeline {
+    agent {
+        docker {
+            image 's430705/ium:4'
+            args '-v /tmp/mlruns:/tmp/mlruns -v /mlruns:/mlruns '
+        }
+    }
+
+    stages {
+    stage('Predict from MLFlow registry') {
+        steps {
+            sh "python3 lab09_predict_coop.py"
+        }
+    }
+}
