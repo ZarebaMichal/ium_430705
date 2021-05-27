@@ -12,4 +12,4 @@ pipeline {
             sh "python3 lab09_predict_coop.py"
         }
     }
-}
+}}
