@@ -12,11 +12,18 @@ mlflow.set_tracking_uri("http://172.17.0.1:5000")
 model = mlflow.pyfunc.load_model(
     model_uri=f"models:/{model_name}/{model_version}"
 )
+
+"""
+Honestly I have no clue how to get model's json input example
+any other way, so just intialize MLFlow client, get latest
+version of choosen model, and then get path to model's files
+"""
+
 client = MlflowClient()
 models_version = client.search_model_versions("name='s430705'")
-print(models_version[-1])
+path_to_input = models_version[-1]["source"]
 
-with open('/tmp/mlruns/0/6be4f90846214df8913a553bc53b1019/artifacts/movies_imdb2/input_example.json', 'r') as datafile:
+with open(f'{path_to_input}/input_example.json', 'r') as datafile:
     data = json.load(datafile)
     example_input = data["inputs"]
 
