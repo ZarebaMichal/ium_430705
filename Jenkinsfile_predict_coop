@@ -9,6 +9,7 @@ pipeline {
     stages {
     stage('Predict from MLFlow registry') {
         steps {
+            sh "cd /tmp"
             sh "ls -al"
             sh "python3 lab_09_predict_coop.py"
 
