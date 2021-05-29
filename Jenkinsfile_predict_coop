@@ -1,7 +1,6 @@
 pipeline {
     agent {
         docker {
-            #image 's430705/ium:4'
             image 's434804/ium:0.5'
             args '-v /tmp/mlruns:/tmp/mlruns -v /mlruns:/mlruns '
         }
