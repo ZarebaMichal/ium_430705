@@ -4,7 +4,7 @@ import pandas as pd
 from pprint import pprint
 from mlflow.tracking import MlflowClient
 
-model_name = "s430705"
+model_name = "s434804"
 model_version = 30
  
 mlflow.set_tracking_uri("http://172.17.0.1:5000")
@@ -20,7 +20,7 @@ version of choosen model, and then get path to model's files
 """
 
 client = MlflowClient()
-models_version = client.search_model_versions("name='s430705'")
+models_version = client.search_model_versions("name='s434804'")
 path_to_input = models_version[-1].source
 
 with open(f'{path_to_input}/input_example.json', 'r') as datafile:
