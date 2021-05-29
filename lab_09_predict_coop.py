@@ -9,9 +9,8 @@ model_version = 12
  
 mlflow.set_tracking_uri("http://172.17.0.1:5000")
 
-model = mlflow.pyfunc.load_model(
+model = mlflow.keras.pyfunc.load_model(
     model_uri=f"models:/{model_name}/{model_version}",
-    compile=False
 )
 
 """
