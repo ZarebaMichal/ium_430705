@@ -5,7 +5,7 @@ from pprint import pprint
 from mlflow.tracking import MlflowClient
 
 model_name = "s434804"
-model_version = 30
+model_version = 12
  
 mlflow.set_tracking_uri("http://172.17.0.1:5000")
 
