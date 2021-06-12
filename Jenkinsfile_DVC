@@ -1,7 +1,7 @@
 pipeline{
     agent {
         docker {
-            image 's434804/ium:0.5'
+            image 'shroomy/ium:8'
             args '-v /tmp/mlruns:/tmp/mlruns -v /mlruns:/mlruns '
         }
     }
@@ -15,8 +15,6 @@ pipeline{
          stage("DVC"){
              steps{
                 withCredentials([string(credentialsId: 'ium-sftp-password', variable: 'IUM_SFTP_PASS')]) {
-                    sh 'pip install dvc'
-                    sh 'pip install dvc[ssh] paramiko'
                     sh "dvc init -f"
                     sh "dvc remote add -d ium_ssh_remote ssh://ium-sftp@tzietkiewicz.vm.wmi.amu.edu.pl/ium-sftp"
                     sh "dvc remote modify --local ium_ssh_remote password $IUM_SFTP_KEY"
