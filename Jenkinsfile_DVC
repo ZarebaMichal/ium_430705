@@ -22,5 +22,6 @@ pipeline{
                 sh "dvc pull"
                 sh "dvc reproduce"
             }
+         }
     }
 }
