@@ -1,0 +1,24 @@
+pipeline{
+    agent {
+        docker {
+            image 's434804/ium:0.5'
+            args '-v /tmp/mlruns:/tmp/mlruns -v /mlruns:/mlruns '
+        }
+    }
+    stages{
+        stage('checkout: Check out from version control'){
+            steps{
+                checkout([$class: 'GitSCM', branches: [[name: '*/master']], doGenerateSubmoduleConfigurations: false, extensions: [], submoduleCfg: [], userRemoteConfigs: [[credentialsId: '3e2b5ea1-7a08-4418-892b-c562315036a4', url: 'https://git.wmi.amu.edu.pl/s430705/ium_430705']]])
+            }
+        }
+         stage("DVC"){
+            withCredentials([sshUserPrivateKey(credentialsId: '48ac7004-216e-4260-abba-1fe5db753e18', keyFileVariable: 'IUM_SFTP_KEY')]) {
+                sh 'pip install dvc'
+                sh 'pip install dvc[ssh] paramiko'
+		        sh 'ssh ium-sftp@tzietkiewicz.vm.wmi.amu.edu.pl -i $IUM_SFTP_KEY'
+                sh 'dvc remote modify --local ium_ssh_remote keyfile $IUM_SFTP_KEY'
+                sh "dvc pull"
+                sh "dvc reproduce"
+            }
+    }
+}
