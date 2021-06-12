@@ -14,6 +14,7 @@ pipeline{
 
          stage("DVC"){
              withCredentials([string(credentialsId: 'ium-sftp-password', variable: 'IUM_SFTP_PASS')]) {
+             steps{
                 sh 'pip install dvc'
                 sh 'pip install dvc[ssh] paramiko'
                 sh "dvc init -f"
@@ -21,7 +22,7 @@ pipeline{
                 sh "dvc remote modify --local ium_ssh_remote password $IUM_SFTP_KEY"
                 sh "dvc pull"
                 sh "dvc reproduce"
-            }
+            }}
          }
     }
 }
