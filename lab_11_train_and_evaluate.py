@@ -3,6 +3,8 @@ from tensorflow.keras.callbacks import EarlyStopping
 from tensorflow.keras.layers import Dense, Dropout
 from tensorflow.keras.models import Sequential
 
+from sklearn.metrics import mean_squared_error
+
 movies_train = pd.read_csv("train.csv")
 X_train = movies_train.drop("rating", axis=1)
 Y_train = movies_train["rating"]
@@ -43,9 +45,10 @@ for i, score in enumerate(predictions):
     print(f"Difference is : {Y_test.iloc[i] - score}")
 
 # Evaluate
-acc = model.evaluate(X_test, Y_test)
-print(acc)
-with open("metrics.txt", "w") as outfile:
-    outfile.write("Accuracy: " + str(acc) + "\n")
+y_pred = model.predict(X_test.values)
+rmse = mean_squared_error(Y_test, y_pred)
 
-print('')
+print(rmse)
+
+with open("metrics.txt", "w") as outfile:
+    outfile.write("RMSE: " + str(rmse) + "\n")
