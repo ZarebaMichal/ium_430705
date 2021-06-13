@@ -47,3 +47,5 @@ acc = model.evaluate(X_test, Y_test)
 print(acc)
 with open("metrics.txt", "w") as outfile:
     outfile.write("Accuracy: " + str(acc) + "\n")
+
+print('')
